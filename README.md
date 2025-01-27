@@ -63,3 +63,15 @@ adaptive_ml_trading/
 └── main.py                       # Main entry point to run the entire project
 
 
+## Contact & Credits
+
+Maintainers:
+
+@gusteauw
+@Nadiy-username
+
+Acknowledgements:
+
+HEC Paris for supporting resources/databases.
+Libraries: Scikit-Learn, PyTorch, Gym, Transformers.
+For questions or collaborations, please open an issue or reach out via email.
