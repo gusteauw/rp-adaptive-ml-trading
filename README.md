@@ -10,22 +10,27 @@ Under the supervision and with guidance of **Professor Augustin Landier**
 ## keywords
 
 Data Retrieval & Preprocessing
+
   Scripts to load market data (prices, volumes) and perform initial cleaning.
   Integration of news or social media sentiment data.
 
 Feature Engineering
+
   Technical indicators (e.g., RSI, MACD, Bollinger Bands).
   Behavioral features (e.g., herding scores, sentiment analysis).
 
 Supervised Learning Benchmarks
+
   Predictive models (e.g., Random Forest, XGBoost) for next-day market movement.
   Baseline comparisons for RL performance.
 
 Reinforcement Learning Agents
+
   Custom Gym environment to simulate trading actions (Buy, Sell, Hold).
   DQN, PPO, A2C, and other RL algorithms to learn adaptive strategies.
 
 Backtesting & Evaluation
+
   Sharpe ratio, maximum drawdown, and alpha calculations.
   Tools for reproducible historical simulations and robust performance metrics.
 
