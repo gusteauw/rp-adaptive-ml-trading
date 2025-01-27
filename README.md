@@ -72,5 +72,5 @@ Maintainers:
 ## Acknowledgements:
 
 HEC Paris for supporting resources/databases.
-Libraries: Scikit-Learn, PyTorch, Gym, Transformers.
+Libraries: Pandas, Scikit-Learn, PyTorch ..
 For questions or collaborations, please open an issue or reach out via email.
