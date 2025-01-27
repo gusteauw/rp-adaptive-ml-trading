@@ -67,7 +67,7 @@ Backtesting & Evaluation
 Maintainers:
 
 @gusteauw
-@Nadiy-username
+@nadiyabdelkarim
 
 ## Acknowledgements:
 
