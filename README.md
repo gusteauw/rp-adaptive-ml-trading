@@ -32,7 +32,7 @@ Backtesting & Evaluation
 
 ## project structure
 
-adaptive_ml_trading/
+```adaptive_ml_trading/
 │── README.md                     # Project documentation
 │── requirements.txt              # Python dependencies
 │── config.py                     # Configuration settings (paths, hyperparameters)
@@ -60,7 +60,7 @@ adaptive_ml_trading/
 │   ├── plotting.py               # Visualization utilities
 │   ├── data_utils.py             # Additional data handling helpers
 │
-└── main.py                       # Main entry point to run the entire project
+└── main.py                       # Main entry point to run the entire project```
 
 
 ## Contact & Credits
