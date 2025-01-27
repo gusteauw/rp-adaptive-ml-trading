@@ -60,8 +60,8 @@ Backtesting & Evaluation
 │   ├── plotting.py               # Visualization utilities
 │   ├── data_utils.py             # Additional data handling helpers
 │
-└── main.py                       # Main entry point to run the entire project```
-
+└── main.py                       # Main entry point to run the entire project
+```
 
 ## Contact & Credits
 
@@ -70,7 +70,7 @@ Maintainers:
 @gusteauw
 @Nadiy-username
 
-Acknowledgements:
+## Acknowledgements:
 
 HEC Paris for supporting resources/databases.
 Libraries: Scikit-Learn, PyTorch, Gym, Transformers.
