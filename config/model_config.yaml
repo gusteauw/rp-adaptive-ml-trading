@@ -1,0 +1,144 @@
+# Data paths
+data:
+  stocks: ["AAPL", "AMZN", "AVGO", "BRK-B", "GOOG", "GOOGL", "META", "MSFT", "NVDA", "TSLA", "WMT"]
+  price_pattern: "data/prices/{symbol}.csv"
+  factor_path: "data/factors/fama_french_factors_daily.csv"
+  sentiment_path: "data/sentiment/processed/combined_sentiment.csv"
+
+# Feature parameters
+feature_params:
+  volatility_lookback: 20
+  momentum_lookback: 10
+  volume_lookback: 5
+  regime_threshold: 1.5
+  herding_window: 60
+
+# Feature columns to use
+feature_columns:
+  # Price-based features
+  - tech_sma
+  - tech_ema
+  - tech_macd
+  - tech_macd_signal
+  - tech_rsi
+  - tech_mom
+  - tech_atr
+  - tech_bbands_upper
+  - tech_bbands_middle
+  - tech_bbands_lower
+  - tech_obv
+  - tech_ad
+  
+  # Behavioral features
+  - behav_vol_cluster
+  - behav_vol_regime
+  - behav_vol_pressure
+  - behav_momentum
+  - behav_mean_rev
+  - behav_herd_pressure
+  
+  # Sentiment features
+  - sentiment_compound_mean
+  - sentiment_compound_std
+  - sentiment_momentum
+  - sentiment_volatility
+  - sentiment_regime
+  - sentiment_impact
+
+# Target column
+target_column: "target"  # 1 for up, 0 for down
+
+# Model configurations
+models:
+  - type: "random_forest"
+    params:
+      n_trials: 100
+      cv_folds: 5
+      test_size: 0.2
+      random_state: 42
+  
+  - type: "gradient_boosting"
+    params:
+      n_trials: 100
+      cv_folds: 5
+      test_size: 0.2
+      random_state: 42
+  
+  - type: "logistic_regression"
+    params:
+      n_trials: 50
+      cv_folds: 5
+      test_size: 0.2
+      random_state: 42
+
+# Training parameters
+training:
+  # Walk-forward analysis parameters
+  walk_forward:
+    train_size: 504  # 2 years
+    validation_size: 126  # 6 months
+    step_size: 63  # 3 months
+    min_samples: 252  # 1 year minimum
+  
+  # Transaction costs and constraints
+  transaction_cost: 0.001  # 10 bps per trade
+  position_limits:
+    max_position: 1.0
+    min_position: -1.0
+  
+  # Risk parameters
+  risk_free_rate: 0.02  # Annual risk-free rate
+  benchmark: "SPY"  # Market benchmark
+  
+  # Factor analysis
+  factor_windows:
+    short_term: 63  # 3 months
+    medium_term: 126  # 6 months
+    long_term: 252  # 1 year
+
+# Evaluation parameters
+evaluation:
+  # Performance metrics
+  metrics:
+    - sharpe_ratio
+    - information_ratio
+    - alpha
+    - beta
+    - max_drawdown
+    - turnover
+    - tracking_error
+  
+  # Risk metrics
+  risk_metrics:
+    volatility_target: 0.15  # Annual volatility target
+    max_leverage: 2.0
+    var_confidence: 0.95
+    expected_shortfall_confidence: 0.95
+  
+  # Factor analysis
+  factor_metrics:
+    - exposure
+    - contribution
+    - r_squared
+    - t_stat
+  
+  # Plots
+  plots:
+    - cumulative_returns
+    - drawdowns
+    - factor_exposures
+    - rolling_metrics
+    - correlation_matrix
+
+# Logging configuration
+logging:
+  level: "INFO"
+  save_path: "logs/training.log"
+  
+# Output configuration
+output:
+  save_predictions: true
+  save_positions: true
+  save_metrics: true
+  generate_reports: true
+  report_format: "html" 
