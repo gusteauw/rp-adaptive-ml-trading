@@ -1,10 +1,10 @@
-# 📈 RP Adaptive ML Trading
+# RP Adaptive ML Trading
 
 A modular, extensible machine learning framework for regime-aware modeling, backtesting, and signal generation in financial markets — built using walk-forward cross-validation and feature-script orchestration.
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 rp-adaptive-ml-trading/
 ├── config/ # Path configurations and environment constants
@@ -17,7 +17,7 @@ rp-adaptive-ml-trading/
 
 ---
 
-## 🧠 Pipelines & Models
+## Pipelines & Models
 
 Each pipeline is modular and supports walk-forward cross-validation and Optuna hyperparameter tuning.
 
@@ -33,7 +33,7 @@ Each pipeline is modular and supports walk-forward cross-validation and Optuna h
 
 ---
 
-## 🏗 Features
+## Features
 
 Feature engineering scripts are registered in `feature_registry.py`, each with:
 - `mode` identifier (e.g. `"tech_momentum_regime"`)
@@ -50,7 +50,7 @@ Feature engineering scripts are registered in `feature_registry.py`, each with:
 
 ---
 
-## 🔁 Walk-Forward Cross-Validation
+## Walk-Forward Cross-Validation
 
 All pipelines are evaluated using **walk-forward cross-validation**, preserving temporal structure for realistic testing.
 
@@ -61,7 +61,7 @@ Benefits:
 
 ---
 
-## 🔬 Hyperparameter Optimization
+## Hyperparameter Optimization
 
 Each pipeline includes **Optuna integration** to optimize model hyperparameters.
 
@@ -74,7 +74,7 @@ results/tech_momentum_regime_y_up_5d_rf_20250628_2310_optuna_trials.csv
 
 ---
 
-## 📦 Setup
+## Setup
 
 ```bash
 # 1. Create environment
