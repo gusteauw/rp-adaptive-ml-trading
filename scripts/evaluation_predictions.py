@@ -76,4 +76,4 @@ with open(out_path, "w") as f:
     f.write(f"Sortino Ratio: {sortino_ratio:.4f}\n")
     f.write(f"Max Drawdown: {max_drawdown:.4f}\n")
 
-print(f"\n✅ Metrics saved to {fname}")
+print(f"\nMetrics saved to {fname}")
