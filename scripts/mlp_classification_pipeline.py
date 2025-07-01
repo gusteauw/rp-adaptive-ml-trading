@@ -1,8 +1,8 @@
 # ============================================================
-# 📁 Script: mlp_classification_pipeline.py
-# 🧠 Model Type: Multi-Layer Perceptron (MLP) Classifier
-# 📊 Task: Binary Classification
-# 🔁 CV: Walk-forward Cross-Validation
+# Script: mlp_classification_pipeline.py
+# Model Type: Multi-Layer Perceptron (MLP) Classifier
+# Task: Binary Classification
+# CV: Walk-forward Cross-Validation
 # ============================================================
 
 import os
@@ -55,8 +55,8 @@ if feature_cols:
 y = y[["date", LABEL]]
 
 df = pd.merge(X, y, on="date").dropna()
-print(f"\n✅ Loaded data for mode: {MODE}")
-print(f"📀 Data shape: {df.shape} | 🎯 Target: {LABEL}")
+print(f"\nLoaded data for mode: {MODE}")
+print(f"Data shape: {df.shape} | Target: {LABEL}")
 
 # --- PREPARE DATA ---------------------------
 dates = df["date"]
@@ -77,11 +77,11 @@ def objective(trial):
     ])
     return cross_val_score(pipeline, X, y, cv=3, scoring="roc_auc").mean()
 
-print("\n🔍 Running Optuna hyperparameter optimization...")
+print("\n Running Optuna hyperparameter optimization...")
 study = optuna.create_study(direction="maximize")
 study.optimize(objective, n_trials=30, show_progress_bar=True)
 
-print(f"\n🏆 Best Parameters: {study.best_params}")
+print(f"\n Best Parameters: {study.best_params}")
 
 # --- FINAL MODEL SETUP ----------------------
 hidden_layers = tuple([study.best_params[k] for k in sorted(study.best_params) if k.startswith("n_units")])
@@ -123,10 +123,10 @@ for fold, (train_idx, test_idx) in enumerate(walk_forward_split(X, n_splits=n_sp
 
 # --- SAVE RESULTS ---------------------------
 res_df = pd.DataFrame(results)
-print("\n📊 Cross-Validation Results:")
+print("\n Cross-Validation Results:")
 print(res_df)
 
-print("\n📝 Classification Report (Last Fold):")
+print("\n Classification Report (Last Fold):")
 report_str = classification_report(y_test, y_pred, target_names=[str(l) for l in unique_labels(y_test, y_pred)])
 print(report_str)
 
