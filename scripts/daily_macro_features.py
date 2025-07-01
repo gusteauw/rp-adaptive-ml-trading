@@ -1,15 +1,15 @@
 # ===========================================
-# 📁 Script: daily_macro_features.py
-# 🧠 MODE: macro_sentiment_regime
-# 🎯 LABEL: macro_vol_switch or future_mkt_return
-# 📈 FEATURES: Fama-French factors, VIX, VXN, VXO, volatility spreads
-# 🧪 MODEL_TYPE: classification or regression
+# Script: daily_macro_features.py
+# MODE: macro_sentiment_regime
+# LABEL: macro_vol_switch or future_mkt_return
+# FEATURES: Fama-French factors, VIX, VXN, VXO, volatility spreads
+# MODEL_TYPE: classification or regression
 # ===========================================
 
 # --- SETUP CONFIG ---------------------------
 MODE = "macro_sentiment_regime"
 LABEL = "macro_vol_switch"
-HORIZON = 5  # days ahead to detect shift
+HORIZON = 5  #days ahead to detect shift
 MODEL_TYPE = "classification"
 
 # --- DEPENDENCIES ---------------------------
@@ -50,7 +50,7 @@ df["vol_spread_chg"] = df["vxn_vxo_spread"] - df["vxn_vxo_spread"].shift(5)
 
 # --- LABELING -------------------------------
 
-# Example: macro volatility regime switch (VIX jump > 10% over 5 days)
+# macro volatility regime switch (VIX jump > 10% over 5 days)
 df[LABEL] = ((df["vix_close"].pct_change(HORIZON) > 0.10).astype(int)).shift(-HORIZON)
 
 # Optional regression label:
@@ -73,9 +73,9 @@ X = df_final[["date"] + feature_cols].copy()
 y = df_final[["date", LABEL]].copy()
 
 # --- OUTPUT CHECK ---------------------------
-print(f"✅ {MODE} features/labels ready.")
-print(f"📐 Shape: {df_final.shape}")
-print(f"🧾 Columns: {df_final.columns.tolist()}")
+print(f"{MODE} features/labels ready.")
+print(f"Shape: {df_final.shape}")
+print(f"Columns: {df_final.columns.tolist()}")
 
 # === API for pipelines ===
 def get_features_and_labels():
