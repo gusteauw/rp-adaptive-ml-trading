@@ -1,8 +1,8 @@
 # ============================================================
-# 📁 Script: meta_regression_pipeline.py
-# 🧠 Model Type: Meta-Ensemble (Regression)
-# 📊 Base Models: Linear, Tree, RL, etc.
-# 🏁 Meta-Model: Ridge (default)
+# Script: meta_regression_pipeline.py
+# Model Type: Meta-Ensemble (Regression)
+# Base Models: Linear, Tree, RL, etc.
+# Meta-Model: Ridge (default)
 # ============================================================
 
 import os
@@ -26,7 +26,7 @@ PRED_FILES = [
     "price_volatility_regime_ret_5d_ridge_predictions_last_fold.csv",
     "price_volatility_regime_ret_5d_rf_predictions_last_fold.csv"
 ]
-META_MODEL_TYPE = "ridge"  # Options: 'ridge', 'lasso', 'gb', 'ols'
+META_MODEL_TYPE = "ridge"  # 'ridge', 'lasso', 'gb', 'ols'
 
 # --- LOAD BASE MODEL PREDICTIONS ------------
 dfs = []
@@ -39,7 +39,7 @@ meta_df = dfs[0]
 for df in dfs[1:]:
     meta_df = pd.merge(meta_df, df, on="date")
 
-# Load y_true from first file (assumes all models used same data)
+# Load y_true from first file (all models used same data)
 y_df = pd.read_csv(os.path.join(RESULTS_DIR, PRED_FILES[0]))[["date", "y_true"]]
 meta_df = pd.merge(meta_df, y_df, on="date").dropna()
 
@@ -70,7 +70,7 @@ rmse = mean_squared_error(y, y_pred, squared=False)
 mae = mean_absolute_error(y, y_pred)
 r2 = r2_score(y, y_pred)
 
-print(f"\n📊 Meta-Ensemble Regression Results:")
+print(f"\n Meta-Ensemble Regression Results:")
 print(f"R²: {r2:.4f} | RMSE: {rmse:.4f} | MAE: {mae:.4f}")
 
 # --- SAVE ----------------------------------
@@ -84,6 +84,6 @@ meta_df.to_csv(os.path.join(RESULTS_DIR, f"{base_name}_results.csv"), index=Fals
 
 metrics_path = os.path.join(RESULTS_DIR, f"{base_name}_metrics.txt")
 with open(metrics_path, "w") as f:
-    f.write(f"R²: {r2:.4f}\nRMSE: {rmse:.4f}\nMAE: {mae:.4f}\n")
+    f.write(f"R²: {r2:.4f}\nRMSE: {rmse:.4f}\n MAE: {mae:.4f}\n")
 
-print(f"\n📁 Saved ensemble predictions and metrics to: {base_name}_results.csv")
+print(f"\n Saved ensemble predictions and metrics to: {base_name}_results.csv")
