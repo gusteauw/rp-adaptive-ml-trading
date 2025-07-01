@@ -1,8 +1,8 @@
 # ============================================================
-# 📁 Script: linear_regression_pipeline.py
-# 🧠 Model Type: Linear Regression
-# 📊 Models: OLS, Ridge, Lasso
-# 🔁 CV: Walk-forward Cross-Validation
+# Script: linear_regression_pipeline.py
+# Model Type: Linear Regression
+# Models: OLS, Ridge, Lasso
+# CV: Walk-forward Cross-Validation
 # ============================================================
 
 import os
@@ -47,8 +47,8 @@ if feature_cols:
 y = y[["date", LABEL]]
 
 df = pd.merge(X, y, on="date").dropna()
-print(f"\n✅ Loaded dataset for mode: {MODE}")
-print(f"📐 Shape: {df.shape} | 🎯 Target: {LABEL}")
+print(f"\n Loaded dataset for mode: {MODE}")
+print(f" Shape: {df.shape} | 🎯 Target: {LABEL}")
 
 # --- DATA PREP -------------------------------
 dates = df["date"]
@@ -101,7 +101,7 @@ for fold, (train_idx, test_idx) in enumerate(walk_forward_split(X_scaled, n_spli
 
 # --- OUTPUT ----------------------------------
 res_df = pd.DataFrame(results)
-print("\n📊 Cross-Validation Results:")
+print("\n Cross-Validation Results:")
 print(res_df)
 
 # --- SAVE ------------------------------------
@@ -114,7 +114,6 @@ os.makedirs(mode_dir, exist_ok=True)
 res_df.to_csv(os.path.join(mode_dir, f"{safe_mode}_{safe_label}_{MODEL}_{timestamp}_cv_results.csv"), index=False)
 preds_df.to_csv(os.path.join(mode_dir, f"{safe_mode}_{safe_label}_{MODEL}_{timestamp}_predictions_last_fold.csv"), index=False)
 
-# Save metrics summary
 report_path = os.path.join(mode_dir, f"{safe_mode}_{safe_label}_{MODEL}_{timestamp}_summary.txt")
 with open(report_path, "w") as f:
     f.write("Cross-Validation Results:\n")
@@ -122,4 +121,4 @@ with open(report_path, "w") as f:
     f.write("\n\nLast Fold Prediction Sample:\n")
     f.write(preds_df.head(10).to_string(index=False))
 
-print(f"\n✅ Results saved to: {mode_dir}")
+print(f"\n Results saved to: {mode_dir}")
