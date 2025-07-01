@@ -1,8 +1,8 @@
 # ============================================================
-# 📁 Script: linear_classification_pipeline.py
-# 🧠 Model Type: Linear Classification
-# 📊 Models: Logistic Regression, Ridge Classifier, etc.
-# 🔁 CV: Walk-forward or expanding window CV
+# Script: linear_classification_pipeline.py
+# Model Type: Linear Classification
+# Models: Logistic Regression, Ridge Classifier, etc.
+# CV: Walk-forward or expanding window CV
 # ============================================================
 
 # --- CONFIG --------------------------
@@ -30,9 +30,8 @@ import os
 
 
 # --- MODE SELECTION -------------------
-# Choose one of the modes from the feature registry
-MODE = "tech_momentum_regime"  # This is the 'mode' value
-LABEL = "y_ret_5d"              # Can switch easily to 'y_up_1d', etc.
+MODE = "tech_momentum_regime"  
+LABEL = "y_ret_5d"              # or 'y_up_1d', etc.
 MODEL = "logistic"             # 'logistic' or 'ridge'
 
 # --- IMPORT FEATURES ------------------
@@ -47,10 +46,9 @@ features_script = entry["script_path"].replace(".py", "")
 feature_cols = entry.get("features", [])
 label_cols = entry["label"]
 
-# Dynamically import the script as a module
+
 mod = import_module(features_script)
 
-# Call get_features_and_labels() function
 X, y = mod.get_features_and_labels()
 
 # --- FILTER FEATURES ------------------
@@ -58,10 +56,10 @@ if feature_cols:
     X = X[["date"] + feature_cols]
 y = y[["date", LABEL]]
 
-# Drop NA and align
+
 df = pd.merge(X, y, on="date").dropna()
-print(f"\n✅ Loaded dataset for mode: {MODE}")
-print(f"📐 Shape: {df.shape} | 🎯 Target: {LABEL}")
+print(f"\n Loaded dataset for mode: {MODE}")
+print(f" Shape: {df.shape} | Target: {LABEL}")
 
 # --- PREP DATA -------------------------
 dates = df["date"]
@@ -81,7 +79,7 @@ else:
 
 # --- WALK FWD CROSS-VALIDATION ------
 n_splits = 5
-test_size = 0.2  # or a fixed integer like 60
+test_size = 0.2 
 results = []
 
 for fold, (train_idx, test_idx) in enumerate(walk_forward_split(X_scaled, n_splits=n_splits, test_size=test_size)):
