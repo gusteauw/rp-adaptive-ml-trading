@@ -1,10 +1,10 @@
 # ===========================================
-# 📁 Script: valuation_features.py
-# 🧠 MODE: valuation_regime
-# 🎯 LABEL: valuation_regime (based on z-score threshold events)
-# 📈 FEATURES: valuation levels, deltas, z-scores
-# 📆 Frequency: Monthly
-# 📊 MODEL_TYPE: classification (regime detection) or regression
+# Script: valuation_features.py
+# MODE: valuation_regime
+# LABEL: valuation_regime (based on z-score threshold events)
+# FEATURES: valuation levels, deltas, z-scores
+# Frequency: Monthly
+# MODEL_TYPE: classification (regime detection) or regression
 # ===========================================
 
 # --- SETUP CONFIG ---------------------------
@@ -12,7 +12,7 @@ MODE = "valuation_regime"
 LABEL = "valuation_regime"
 HORIZONS = [21]  # Forward-looking 1-month return
 MODEL_TYPE = "classification"  # Regime change detection
-NORMALIZE = False  # Applied later in pipeline if needed
+NORMALIZE = False  # if needed
 
 # --- DEPENDENCIES ---------------------------
 import pandas as pd
@@ -24,13 +24,13 @@ from config.paths import RAW_DIR
 file_path = os.path.join(RAW_DIR, "AAPL", "AAPL_valuations.csv")
 df = pd.read_csv(file_path, skiprows=1)
 
-# Drop metadata and summary rows
+# Dropping metadata and summary rows
 df = df[df["date"].str.lower() != "ttm"]
 df = df.iloc[:, :-2]  # Drop last two mostly-NaN columns
 df["date"] = pd.to_datetime(df["date"], errors="coerce")
 df = df.dropna(subset=["date"])
 
-# Strip commas and convert to float
+# Stripping commas and converting to float
 for col in df.columns:
     if col not in ["date", "ticker"]:
         df[col] = (
@@ -80,10 +80,10 @@ df_final = df.dropna(subset=features + [LABEL]).reset_index(drop=True)
 X = df_final[["date"] + features].copy()
 y = df_final[["date", LABEL]].copy()
 # --- OUTPUT ---------------------------
-print(f"✅ {MODE} features/labels ready.")
-print(f"📐 Shape: {df_final.shape}")
-print(f"📊 Features: {len(features)}")
-print(f"📎 Columns: {df_final.columns.tolist()}")
+print(f"{MODE} features/labels ready.")
+print(f"Shape: {df_final.shape}")
+print(f"Features: {len(features)}")
+print(f"Columns: {df_final.columns.tolist()}")
 
 # === API for pipelines ===
 def get_features_and_labels():
