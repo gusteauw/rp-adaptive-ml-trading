@@ -1,7 +1,7 @@
 # ============================================================
-# 📁 Script: logistic_regression_pipeline.py
-# 📊 Model Type: Logistic Regression (L1/L2 penalties)
-# 🔁 CV: Walk-forward Cross-Validation
+# Script: logistic_regression_pipeline.py
+# Model Type: Logistic Regression (L1/L2 penalties)
+# CV: Walk-forward Cross-Validation
 # ============================================================
 
 import os
@@ -30,7 +30,7 @@ from datetime import datetime
 # --- CONFIGURATION --------------------------
 MODE = "daily_macro_features"    # Any mode from feature_registry
 LABEL = "direction_5d"           # Binary target
-PENALTY = "l2"                   # Options: "l1", "l2"
+PENALTY = "l2"                   # "l1", "l2"
 
 # --- LOAD FEATURE CONFIG --------------------
 from feature_registry import feature_registry
@@ -51,8 +51,8 @@ if feature_cols:
 y = y[["date", LABEL]]
 
 df = pd.merge(X, y, on="date").dropna()
-print(f"\n✅ Loaded data for mode: {MODE}")
-print(f"📊 Data shape: {df.shape} | 🌟 Target: {LABEL}")
+print(f"\n Loaded data for mode: {MODE}")
+print(f" Data shape: {df.shape} | Target: {LABEL}")
 
 # --- PREPARE DATA ---------------------------
 dates = df["date"]
@@ -69,11 +69,11 @@ def objective(trial):
     model = LogisticRegression(penalty=PENALTY, C=C, solver=solver, max_iter=1000, random_state=42)
     return cross_val_score(model, X_scaled, y, cv=3, scoring="roc_auc").mean()
 
-print("\n🔍 Running Optuna hyperparameter optimization...")
+print("\n Running Optuna hyperparameter optimization...")
 study = optuna.create_study(direction="maximize")
 study.optimize(objective, n_trials=30, show_progress_bar=True)
 
-print(f"\n🏆 Best Parameters: {study.best_params}")
+print(f"\n Best Parameters: {study.best_params}")
 C = study.best_params["C"]
 solver = "liblinear" if PENALTY == "l1" else "lbfgs"
 model = LogisticRegression(penalty=PENALTY, C=C, solver=solver, max_iter=1000, random_state=42)
@@ -102,10 +102,10 @@ for fold, (train_idx, test_idx) in enumerate(walk_forward_split(X_scaled, n_spli
 
 # --- REPORT & SAVE --------------------------
 res_df = pd.DataFrame(results)
-print("\n📊 Cross-Validation Results:")
+print("\n Cross-Validation Results:")
 print(res_df)
 
-print("\n📝 Classification Report (Last Fold):")
+print("\n Classification Report (Last Fold):")
 print(classification_report(y_test, y_pred))
 
 # --- SAVE ARTIFACTS --------------------------
