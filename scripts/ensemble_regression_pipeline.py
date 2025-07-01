@@ -1,8 +1,8 @@
 # ============================================================
-# 📁 Script: ensemble_regression_pipeline.py
-# 🧠 Model Type: Ensemble Regression
-# 📊 Models: VotingRegressor, StackingRegressor
-# 🔁 CV: Walk-forward Cross-Validation
+# Script: ensemble_regression_pipeline.py
+# Model Type: Ensemble Regression
+# Models: VotingRegressor, StackingRegressor
+# CV: Walk-forward Cross-Validation
 # ============================================================
 
 import os
@@ -29,7 +29,7 @@ from config.paths import RESULTS_DIR
 # --- CONFIGURATION --------------------------
 MODE = "price_volatility_regime"
 LABEL = "fwd_return_5d"
-MODEL = "stack"  # Options: 'vote', 'stack'
+MODEL = "stack"  # 'vote', 'stack'
 
 # --- LOAD FEATURE CONFIG --------------------
 entry = next((cfg for cfg in feature_registry.values() if cfg["mode"] == MODE), None)
@@ -95,7 +95,7 @@ for fold, (train_idx, test_idx) in enumerate(walk_forward_split(X_scaled, n_spli
 
 # --- RESULTS & SAVE -------------------------
 res_df = pd.DataFrame(results)
-print("\n📊 Cross-Validation Results:")
+print("\n Cross-Validation Results:")
 print(res_df)
 
 safe_mode = MODE.replace(".", "_")
