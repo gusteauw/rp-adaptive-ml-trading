@@ -1,6 +1,6 @@
 # =============================================
-# 📁 Module: walkforward_cv.py
-# 🔁 Utility for Walk-Forward Cross-Validation
+# Module: walkforward_cv.py
+# Utility for Walk-Forward Cross-Validation
 # =============================================
 
 import numpy as np
