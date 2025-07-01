@@ -1,8 +1,8 @@
 # ============================================================
-# 📁 Script: hybrid_classification_pipeline.py
-# ⚡ Model Type: Hybrid Classifier
-# 🧠 Features: Combined multi-source inputs
-# 🔁 CV: Walk-forward Cross-Validation
+# Script: hybrid_classification_pipeline.py
+# Model Type: Hybrid Classifier
+# Features: Combined multi-source inputs
+# CV: Walk-forward Cross-Validation
 # ============================================================
 
 import os
@@ -29,7 +29,7 @@ from config.paths import RESULTS_DIR
 # --- CONFIGURATION --------------------------
 FEATURE_SOURCES = ["technical_features", "daily_macro_features", "options_features"]
 LABEL = "y_up_5d"
-MODEL_TYPE = "logistic"  # Options: "logistic", "rf"
+MODEL_TYPE = "logistic"  # "logistic", "rf"
 
 # --- LOAD & MERGE FEATURES ------------------
 merged_df = None
@@ -56,8 +56,8 @@ dates = merged_df["date"]
 y = merged_df[LABEL]
 X = merged_df.drop(columns=["date", LABEL])
 
-print(f"\n✅ Loaded hybrid features from: {FEATURE_SOURCES}")
-print(f"📐 X shape: {X.shape}, y shape: {y.shape}")
+print(f"\n Loaded hybrid features from: {FEATURE_SOURCES}")
+print(f" X shape: {X.shape}, y shape: {y.shape}")
 
 # --- SCALING -------------------------------
 scaler = StandardScaler()
@@ -98,10 +98,10 @@ for fold, (train_idx, test_idx) in enumerate(walk_forward_split(X_scaled, n_spli
 
 # --- REPORTS -------------------------------
 res_df = pd.DataFrame(results)
-print("\n📊 Cross-Validation Results:")
+print("\n Cross-Validation Results:")
 print(res_df)
 
-print("\n📝 Classification Report (Last Fold):")
+print("\n Classification Report (Last Fold):")
 print(classification_report(y_test, y_pred))
 
 # --- SAVE OUTPUTS --------------------------
@@ -126,5 +126,5 @@ preds_df.to_csv(os.path.join(RESULTS_DIR, f"{fname_base}_predictions_last_fold.c
 if hasattr(model, "feature_importances_"):
     importances = pd.Series(model.feature_importances_, index=X.columns).sort_values(ascending=False)
     importances.to_csv(os.path.join(RESULTS_DIR, f"{fname_base}_feature_importances.csv"))
-    print("\n🌟 Top 10 Feature Importances:")
+    print("\n Top 10 Feature Importances:")
     print(importances.head(10))
