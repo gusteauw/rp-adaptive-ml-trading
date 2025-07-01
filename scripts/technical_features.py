@@ -1,10 +1,10 @@
 # ===========================================
-# 📁 Script: technical_features.py
-# 🧠 MODE: tech_momentum_regime
-# 🎯 LABEL: return_class_{horizon} or vol_spike
-# 📈 FEATURES: momentum, volatility, price behavior
-# 📆 Frequency: Daily
-# 🧪 MODEL_TYPE: classification or regression
+# Script: technical_features.py
+# MODE: tech_momentum_regime
+# LABEL: return_class_{horizon} or vol_spike
+# FEATURES: momentum, volatility, price behavior
+# Frequency: Daily
+# MODEL_TYPE: classification or regression
 # ===========================================
 
 # --- SETUP CONFIG ---------------------------
@@ -27,7 +27,6 @@ import os
 # --- LOAD ---------------------------
 file_path = os.path.join(RAW_DIR, "AAPL", "AAPL_2014_2024_technical_cleaned.csv")
 df = pd.read_csv(file_path, parse_dates=["date"])
-#df = pd.read_csv("/data/raw/AAPL/AAPL_2014_2024_technical_cleaned.csv", parse_dates=["date"])
 df = df.sort_values("date").reset_index(drop=True)
 
 # --- CLEAN COLUMN NAMES ---------------------
@@ -77,10 +76,10 @@ y = df[["date", "y_up_1d", "y_up_5d", "y_up_20d", "y_ret_1d", "y_ret_5d", "y_vol
 y = y[y["date"].isin(X["date"])].reset_index(drop=True)
 
 # --- OUTPUT CHECK ---------------------------
-print(f"✅ {MODE} features and labels prepared.")
-print(f"📐 Feature matrix shape: {X.shape}")
-print(f"🎯 Label matrix shape:   {y.shape}")
-print(f"🧠 Selected {len(final_features)} technical features.")
+print(f"{MODE} features and labels prepared.")
+print(f"Feature matrix shape: {X.shape}")
+print(f"Label matrix shape:   {y.shape}")
+print(f"Selected {len(final_features)} technical features.")
 
 # === API for pipeline use ===
 def get_features_and_labels():
