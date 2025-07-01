@@ -1,6 +1,6 @@
 # =============================================
-# 📁 Script: feature_registry.py
-# 🔧 Registry of feature/label script configs
+# Script: feature_registry.py
+# Registry of feature/label script configs
 # Used for automated model pipeline selection
 # =============================================
 
@@ -59,7 +59,7 @@ feature_registry = {
     # === OPTIONS FEATURES ===
     "options_features": {
         "mode": "options_sentiment_regime",
-        "label": ["ret_5d", "vol_5d", "direction_5d"],  # placeholder — update if labels are added
+        "label": ["ret_5d", "vol_5d", "direction_5d"],  # may add more
         "frequency": "daily",
         "script_path": "options_features.py",
         "feature_file": "AAPL_options_v3.csv",
@@ -68,11 +68,11 @@ feature_registry = {
 }
 
 
-# === Utility (optional for pipelines) ===
+# === Utility ===
 def get_feature_config(name):
     return feature_registry.get(name)
 
 
 if __name__ == "__main__":
     for key, config in feature_registry.items():
-        print(f"🔹 {key}: mode={config['mode']}, labels={config['label']}, file={config['feature_file']}")
+        print(f" {key}: mode={config['mode']}, labels={config['label']}, file={config['feature_file']}")
