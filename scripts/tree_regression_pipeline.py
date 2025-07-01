@@ -1,8 +1,8 @@
 # ============================================================
-# 📁 Script: tree_regression_pipeline.py
-# 🌳 Model Type: Tree-Based Regression
-# 📊 Models: Random Forest, Gradient Boosting, etc.
-# 🔁 CV: Walk-forward Cross-Validation
+# Script: tree_regression_pipeline.py
+# Model Type: Tree-Based Regression
+# Models: Random Forest, Gradient Boosting, etc.
+# CV: Walk-forward Cross-Validation
 # ============================================================
 
 import os
@@ -33,7 +33,7 @@ from datetime import datetime
 # --- CONFIGURATION --------------------------
 MODE = "price_volatility_regime"  # Any mode from feature_registry
 LABEL = "ret_5d"                  # Regression target: return, volatility, etc.
-MODEL = "rf"                      # Options: "rf", "gb"
+MODEL = "rf"                      # "rf", "gb"
 
 # --- LOAD FEATURE CONFIG --------------------
 from feature_registry import feature_registry
@@ -54,8 +54,8 @@ if feature_cols:
 y = y[["date", LABEL]]
 
 df = pd.merge(X, y, on="date").dropna()
-print(f"\n✅ Loaded data for mode: {MODE}")
-print(f"📐 Data shape: {df.shape} | 🎯 Target: {LABEL}")
+print(f"\n Loaded data for mode: {MODE}")
+print(f" Data shape: {df.shape} | Target: {LABEL}")
 
 # --- PREPARE DATA ---------------------------
 dates = df["date"]
@@ -87,12 +87,12 @@ def objective(trial):
 
     return cross_val_score(model, X_scaled, y, cv=3, scoring="r2").mean()
 
-print("\n🔍 Running Optuna hyperparameter optimization...")
+print("\n Running Optuna hyperparameter optimization...")
 study = optuna.create_study(direction="maximize")
 study.optimize(objective, n_trials=30, show_progress_bar=True)
 
 # Best params & model
-print(f"\n🏆 Best Parameters: {study.best_params}")
+print(f"\n Best Parameters: {study.best_params}")
 best_params = study.best_params
 if MODEL == "rf":
     model = RandomForestRegressor(**best_params, random_state=42)
@@ -123,13 +123,13 @@ for fold, (train_idx, test_idx) in enumerate(walk_forward_split(X_scaled, n_spli
 
 # --- RESULTS REPORT -------------------------
 res_df = pd.DataFrame(results)
-print("\n📊 Cross-Validation Results:")
+print("\n Cross-Validation Results:")
 print(res_df)
 
-# --- FEATURE IMPORTANCES (OPTIONAL) ---------
+# --- FEATURE IMPORTANCES ---------
 if hasattr(model, "feature_importances_"):
     importances = pd.Series(model.feature_importances_, index=X.columns)
-    print("\n🌟 Top 10 Feature Importances:")
+    print("\n Top 10 Feature Importances:")
     print(importances.sort_values(ascending=False).head(10))
 
 
@@ -138,7 +138,7 @@ safe_mode = MODE.replace(".", "_")
 safe_label = LABEL.replace(".", "_")
 timestamp = datetime.now().strftime("%Y%m%d_%H%M")
 
-# Create subdirectory per mode
+# Creating a subdirectory per mode
 mode_dir = os.path.join(RESULTS_DIR, safe_mode)
 os.makedirs(mode_dir, exist_ok=True)
 
@@ -148,13 +148,13 @@ optuna_filename = f"{safe_mode}_{safe_label}_{MODEL}_{timestamp}_optuna_trials.c
 preds_filename = f"{safe_mode}_{safe_label}_{MODEL}_{timestamp}_predictions_last_fold.csv"
 importances_filename = f"{safe_mode}_{safe_label}_{MODEL}_{timestamp}_feature_importances.csv"
 
-# Save CV results
+# Saving CV results
 res_df.to_csv(os.path.join(mode_dir, cv_filename), index=False)
 
-# Save Optuna results
+# Saving Optuna results
 study.trials_dataframe().to_csv(os.path.join(mode_dir, optuna_filename), index=False)
 
-# Save predictions for last fold
+# Saving predictions for last fold
 preds_df = pd.DataFrame({
     "date": d_test.values,
     "y_true": y_test.values,
@@ -162,7 +162,7 @@ preds_df = pd.DataFrame({
 })
 preds_df.to_csv(os.path.join(mode_dir, preds_filename), index=False)
 
-# Save feature importances
+# Saveing feature importances
 if hasattr(model, "feature_importances_"):
     importances = pd.Series(model.feature_importances_, index=X.columns).sort_values(ascending=False)
     importances.to_csv(os.path.join(mode_dir, importances_filename))
