@@ -122,4 +122,4 @@ filename = f"{safe_mode}_{safe_label}_{MODEL}_{timestamp}_rl_regression.csv"
 
 os.makedirs(RESULTS_DIR, exist_ok=True)
 preds_df.to_csv(os.path.join(RESULTS_DIR, filename), index=False)
-print(f"\n📁 Saved predictions to: {filename}")
+print(f"\n Saved predictions to: {filename}")
