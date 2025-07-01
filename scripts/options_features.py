@@ -1,9 +1,9 @@
 # ===========================================
-# 📁 Script: options_features.py
-# 🧠 MODE: options_sentiment_regime
-# 🎯 LABEL: to be joined later with market data
-# 📈 FEATURES: iv surface, flow asymmetries, call/put bias
-# 🧪 MODEL_TYPE: classification / hybrid
+# Script: options_features.py
+# MODE: options_sentiment_regime
+# LABEL: to be joined later with market data
+# FEATURES: flow asymmetries, call/put info
+# MODEL_TYPE: classification / hybrid
 # ===========================================
 
 
@@ -92,14 +92,14 @@ agg.columns = [f"{metric}_{bucket}_{otype}" for metric, bucket, otype in agg.col
 options_features = agg.reset_index()
 
 # --- OUTPUT CHECK ---------------------------
-print(f"✅ {MODE} features ready.")
-print(f"📐 Shape: {options_features.shape}")
-print(f"🧾 Columns: {options_features.columns.tolist()}")
+print(f"{MODE} features ready.")
+print(f"Shape: {options_features.shape}")
+print(f"Columns: {options_features.columns.tolist()}")
 
 
 # --- API ------------------------------------
 def get_features_and_labels():
     X = options_features.copy()
     y = X[["date"]].copy()
-    y["dummy_label"] = np.nan  # placeholder, overwritten in pipeline
+    y["dummy_label"] = np.nan  # overwritten in pipeline
     return X, y
