@@ -47,7 +47,7 @@ sortino_ratio = emp.sortino_ratio(daily_returns)
 max_drawdown = emp.max_drawdown(daily_returns)
 
 # --- OUTPUT SUMMARY -----------------------------
-print("\n📈 Performance Metrics Summary")
+print("\n Performance Metrics Summary")
 print(f"R²: {r2:.4f}")
 print(f"RMSE: {rmse:.4f}")
 print(f"MAE: {mae:.4f}")
