@@ -1,10 +1,10 @@
 # ===========================================
-# 📁 Script: merged_daily_macro_features.py
-# 🧠 MODE: macro_regime
-# 🎯 LABEL: macro_volatility_regime or fwd_macro_return
-# 📈 FEATURES: FF factors, vol indices, derived risk metrics
-# 📆 Frequency: Daily
-# 📊 MODEL_TYPE: classification (regime) or regression
+# Script: merged_daily_macro_features.py
+# MODE: macro_regime
+# LABEL: macro_volatility_regime or fwd_macro_return
+# FEATURES: FF factors, vol indices, derived risk metrics
+# Frequency: Daily
+# MODEL_TYPE: classification (regime) or regression
 # ===========================================
 
 # --- SETUP CONFIG ---------------------------
@@ -26,10 +26,9 @@ df = pd.read_csv(file_path, parse_dates=["date"])
 df = df.sort_values("date").reset_index(drop=True)
 
 # --- CLEANING ---------------------------
-# Optional renaming
 df.rename(columns={"adj_close": "adj_close"}, inplace=True)
 
-# Drop rows with missing essential factor data
+# Dropping rows with missing essential factor data
 ff_cols = [col for col in df.columns if "ff" in col]
 df = df.dropna(subset=ff_cols)
 
@@ -50,7 +49,7 @@ for base in ["vix", "vxo", "vxn", "vxd"]:
         df[f"{base}_range"] = df[f"{base}_high"] - df[f"{base}_low"]
         df[f"{base}_change"] = df[f"{base}_close"].pct_change()
     except:
-        pass  # Some indices may be missing
+        pass  
 
 # 4. Optional: volatility spreads across indices
 if all(col in df.columns for col in ["vix_close", "vxn", "vxo"]):
@@ -83,10 +82,10 @@ X = df[["date"] + macro_feature_cols].dropna().reset_index(drop=True)
 y = df[["date", LABEL]].dropna().reset_index(drop=True)
 
 # --- OUTPUT CHECK ---------------------------
-print(f"✅ {MODE} features and labels ready.")
-print(f"📐 Feature matrix shape: {X.shape}")
-print(f"🎯 Label matrix shape:   {y.shape}")
-print(f"📊 Feature count: {len(macro_feature_cols)}")
+print(f"{MODE} features and labels ready.")
+print(f"Feature matrix shape: {X.shape}")
+print(f"Label matrix shape:   {y.shape}")
+print(f"Feature count: {len(macro_feature_cols)}")
 
 
 # --- API FUNCTION -----------------------------
