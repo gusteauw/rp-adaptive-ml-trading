@@ -1,8 +1,8 @@
 # ============================================================
-# 📁 Script: ensemble_classification_pipeline.py
-# 🌍 Model Type: Ensemble Classifier
-# 📊 Models: Voting (Soft), Blending (Stacked)
-# 🔁 CV: Walk-forward Cross-Validation
+# Script: ensemble_classification_pipeline.py
+# Model Type: Ensemble Classifier
+# Models: Voting (Soft), Blending (Stacked)
+# CV: Walk-forward Cross-Validation
 # ============================================================
 
 import os
@@ -53,8 +53,8 @@ if feature_cols:
 y = y[["date", LABEL]]
 
 df = pd.merge(X, y, on="date").dropna()
-print(f"\n🚀 Loaded data for mode: {MODE}")
-print(f"📊 Shape: {df.shape} | 🌟 Target: {LABEL}")
+print(f"\n Loaded data for mode: {MODE}")
+print(f" Shape: {df.shape} | 🌟 Target: {LABEL}")
 
 # --- PREPARE DATA ---------------------------
 dates = df["date"]
@@ -107,9 +107,9 @@ for fold, (train_idx, test_idx) in enumerate(walk_forward_split(X_scaled, n_spli
 
 # --- REPORT ---------------------------------
 res_df = pd.DataFrame(results)
-print("\n📊 Cross-Validation Results:")
+print("\n Cross-Validation Results:")
 print(res_df)
-print("\n📜 Classification Report (Last Fold):")
+print("\n Classification Report (Last Fold):")
 print(classification_report(y_test, y_pred))
 
 # --- SAVE RESULTS ---------------------------
@@ -124,4 +124,4 @@ res_df.to_csv(os.path.join(mode_dir, f"{safe_mode}_{safe_label}_{ENSEMBLE_TYPE}_
 with open(os.path.join(mode_dir, f"{safe_mode}_{safe_label}_{ENSEMBLE_TYPE}_{timestamp}_classification_report.txt"), "w") as f:
     f.write(classification_report(y_test, y_pred))
 
-print(f"\n📅 Results saved to: {mode_dir}")
+print(f"\n Results saved to: {mode_dir}")
