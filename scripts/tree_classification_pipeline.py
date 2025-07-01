@@ -1,8 +1,8 @@
 # ============================================================
-# 📁 Script: tree_classification_pipeline.py
-# 🌳 Model Type: Tree-Based Classification
-# 📊 Models: Random Forest, Gradient Boosting, etc.
-# 🔁 CV: Walk-forward Cross-Validation
+# Script: tree_classification_pipeline.py
+# Model Type: Tree-Based Classification
+# Models: Random Forest, Gradient Boosting, etc.
+# CV: Walk-forward Cross-Validation
 # ============================================================
 
 
@@ -31,9 +31,9 @@ import optuna
 
 
 # --- CONFIGURATION --------------------------
-MODE = "tech_momentum_regime"   # Any mode from feature_registry
+MODE = "tech_momentum_regime"   
 LABEL = "y_up_5d"               # e.g. y_up_1d, valuation_regime, etc.
-MODEL = "rf"                    # Options: "rf", "gb"
+MODEL = "rf"                    # "rf", "gb"
 
 # --- LOAD FEATURE CONFIG --------------------
 from feature_registry import feature_registry
@@ -54,8 +54,8 @@ if feature_cols:
 y = y[["date", LABEL]]
 
 df = pd.merge(X, y, on="date").dropna()
-print(f"\n✅ Loaded data for mode: {MODE}")
-print(f"📐 Data shape: {df.shape} | 🎯 Target: {LABEL}")
+print(f"\n Loaded data for mode: {MODE}")
+print(f" Data shape: {df.shape} | Target: {LABEL}")
 
 # --- PREPARE DATA ---------------------------
 dates = df["date"]
@@ -88,12 +88,12 @@ def objective(trial):
     score = cross_val_score(model, X_scaled, y, cv=3, scoring="roc_auc").mean()
     return score
 
-print("\n🔍 Running Optuna hyperparameter optimization...")
+print("\n Running Optuna hyperparameter optimization...")
 study = optuna.create_study(direction="maximize")
 study.optimize(objective, n_trials=30, show_progress_bar=True)
 
 # Best params & model
-print(f"\n🏆 Best Parameters: {study.best_params}")
+print(f"\n Best Parameters: {study.best_params}")
 best_params = study.best_params
 if MODEL == "rf":
     model = RandomForestClassifier(**best_params, random_state=42)
@@ -127,22 +127,22 @@ for fold, (train_idx, test_idx) in enumerate(walk_forward_split(X_scaled, n_spli
 
 # --- RESULTS REPORT -------------------------
 res_df = pd.DataFrame(results)
-print("\n📊 Cross-Validation Results:")
+print("\n Cross-Validation Results:")
 print(res_df)
 
-print("\n📝 Classification Report (Last Fold):")
+print("\n Classification Report (Last Fold):")
 print(classification_report(y_test, y_pred))
 
 safe_mode = MODE.replace(".", "_")
 safe_label = LABEL.replace(".", "_")
-# Save Classification Report
+# Classification Report
 from sklearn.utils.multiclass import unique_labels
 
 report_str = classification_report(y_test, y_pred, target_names=[str(label) for label in unique_labels(y_test, y_pred)])
 with open(os.path.join(RESULTS_DIR, f"{safe_mode}_{safe_label}_{MODEL}_classification_report.txt"), "w") as f:
     f.write(report_str)
 
-# Save Feature Importances
+# Feature Importances
 if hasattr(model, "feature_importances_"):
     importances = pd.Series(model.feature_importances_, index=X.columns).sort_values(ascending=False)
     importances.to_csv(os.path.join(RESULTS_DIR, f"{safe_mode}_{safe_label}_{MODEL}_feature_importances.csv"))
