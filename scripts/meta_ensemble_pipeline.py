@@ -1,8 +1,8 @@
 # ============================================================
-# 📁 Script: meta_ensemble_pipeline.py
-# 🧠 Model Type: Meta-Ensemble (Stacked Generalization)
-# 📊 Base Models: Linear, Tree, RL, etc.
-# 🏁 Meta-Model: Logistic Regression (default)
+# Script: meta_ensemble_pipeline.py
+# Model Type: Meta-Ensemble (Stacked Generalization)
+# Base Models: Linear, Tree, RL, etc.
+# Meta-Model: Logistic Regression (default)
 # ============================================================
 
 import os
@@ -28,7 +28,7 @@ PRED_FILES = [
     "price_volatility_regime_y_up_5d_logistic_predictions_last_fold.csv",
     "tech_momentum_regime_y_up_5d_ppo_rl_preds.csv"
 ]
-META_MODEL_TYPE = "logistic"  # Options: 'logistic', 'gb'
+META_MODEL_TYPE = "logistic"  # 'logistic', 'gb'
 
 # --- LOAD PREDICTIONS -----------------------
 dfs = []
@@ -41,7 +41,7 @@ meta_df = dfs[0]
 for df in dfs[1:]:
     meta_df = pd.merge(meta_df, df, on="date")
 
-# Use one of the source files for ground truth
+# ground truth
 y_file = os.path.join(RESULTS_DIR, PRED_FILES[0])
 y_df = pd.read_csv(y_file)[["date", "y_true"]]
 meta_df = pd.merge(meta_df, y_df, on="date").dropna()
@@ -70,8 +70,8 @@ y_proba = meta_model.predict_proba(X_scaled)[:, 1] if hasattr(meta_model, "predi
 acc = accuracy_score(y, y_pred)
 auc = roc_auc_score(y, y_proba) if y_proba is not None else np.nan
 
-print(f"\n📊 Meta-Ensemble Accuracy: {acc:.4f}, AUC: {auc:.4f}")
-print("\n📝 Classification Report:")
+print(f"\n Meta-Ensemble Accuracy: {acc:.4f}, AUC: {auc:.4f}")
+print("\n Classification Report:")
 print(classification_report(y, y_pred))
 
 # --- SAVE RESULTS --------------------------
@@ -87,4 +87,4 @@ meta_df.to_csv(os.path.join(RESULTS_DIR, f"{base_name}_results.csv"), index=Fals
 with open(os.path.join(RESULTS_DIR, f"{base_name}_report.txt"), "w") as f:
     f.write(classification_report(y, y_pred, target_names=[str(l) for l in unique_labels(y, y_pred)]))
 
-print(f"\n📁 Meta-ensemble results saved to: {base_name}_results.csv")
+print(f"\n Meta-ensemble results saved to: {base_name}_results.csv")
