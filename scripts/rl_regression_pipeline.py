@@ -1,8 +1,8 @@
 # ============================================================
-# 🌟 Script: rl_regression_pipeline.py
-# 🌬️ Model Type: RL-Based Regression (Reward from returns)
-# 🌎 Environment: Gym-like Custom RL Env
-# 🖋️ Goal: Minimize error by reinforcing accurate forecasts
+# Script: rl_regression_pipeline.py
+# Model Type: RL-Based Regression (Reward from returns)
+# Environment: Gym-like Custom RL Env
+# Goal: Minimize error by reinforcing accurate forecasts
 # ============================================================
 
 import os
@@ -87,7 +87,7 @@ ModelClass = model_dict.get(MODEL)
 if ModelClass is None:
     raise ValueError("Unsupported RL model.")
 
-print(f"\n🚀 Training {MODEL.upper()} agent for regression...")
+print(f"\n Training {MODEL.upper()} agent for regression...")
 model = ModelClass("MlpPolicy", env, verbose=0)
 model.learn(total_timesteps=10000)
 
@@ -113,7 +113,7 @@ mae = mean_absolute_error(preds_df["y_true"], preds_df["y_pred"])
 rmse = mean_squared_error(preds_df["y_true"], preds_df["y_pred"], squared=False)
 r2 = r2_score(preds_df["y_true"], preds_df["y_pred"])
 
-print(f"\n🔢 MAE: {mae:.4f} | RMSE: {rmse:.4f} | R2: {r2:.4f}")
+print(f"\n MAE: {mae:.4f} | RMSE: {rmse:.4f} | R2: {r2:.4f}")
 
 # --- SAVE RESULTS ---------------------------
 safe_mode = MODE.replace(".", "_")
