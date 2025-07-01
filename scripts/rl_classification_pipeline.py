@@ -1,8 +1,8 @@
 # ============================================================
-# 📁 Script: rl_classification_pipeline.py
-# 🧱 Model Type: Reinforcement Learning for Classification
-# 📊 Goal: Optimize action policy based on feature signals
-# 🔁 CV: Walk-forward CV adapted for RL setting
+# Script: rl_classification_pipeline.py
+# Model Type: Reinforcement Learning for Classification
+# Goal: Optimize action policy based on feature signals
+# CV: Walk-forward CV adapted for RL setting
 # ============================================================
 
 import os
@@ -56,8 +56,8 @@ if feature_cols:
 y = y[["date", LABEL]]
 
 df = pd.merge(X, y, on="date").dropna()
-print(f"\n🚀 Loaded data for mode: {MODE}")
-print(f"📀 Data shape: {df.shape} | 🌟 Target: {LABEL}")
+print(f"\n Loaded data for mode: {MODE}")
+print(f"Data shape: {df.shape} | Target: {LABEL}")
 
 # --- ENVIRONMENT CLASS ----------------------
 class ClassificationEnv(gym.Env):
@@ -116,12 +116,12 @@ for fold, (train_idx, test_idx) in enumerate(walk_forward_split(X_scaled, n_spli
         "accuracy": acc
     })
 
-    print(f"\n📝 Fold {fold} Report:")
+    print(f"\n Fold {fold} Report:")
     print(classification_report(y_test, preds))
 
 # --- SAVE -----------------------------------
 res_df = pd.DataFrame(results)
-print("\n📊 Cross-Validation Summary:")
+print("\n Cross-Validation Summary:")
 print(res_df)
 
 safe_mode = MODE.replace(".", "_")
