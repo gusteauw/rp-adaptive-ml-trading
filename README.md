@@ -28,7 +28,7 @@ Each pipeline is modular and supports walk-forward cross-validation and Optuna h
 | `linear_regression_pipeline.py`   | OLS, Ridge, Lasso           | Baseline linear modeling                |
 | `logistic_regression_pipeline.py` | Logistic, RidgeClassifier   | Probabilistic classification            |
 | `ensemble_classification_pipeline.py` | Voting/Stacking Classifier | Combine multiple classifiers            |
-| `rl_classification_pipeline.py`   | PPO, A2C, DQN               | RL for directional policy decisions     |
+| `rl_classification_pipeline.py`   | PPO, A2C               | RL for directional policy decisions     |
 | `rl_regression_pipeline.py`       | PPO with continuous rewards | RL for return optimization              |
 
 ---
