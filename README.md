@@ -20,7 +20,7 @@ rp-adaptive-ml-trading/
 
 ## Pipelines
 What this notebook does:
-
+### Parameters & Methods:
 - Ingest & QC: prices (close) + engineered features for a stable universe.
 - Targets: forward returns at 5D and 21D (trading days).
 - As-of alignment: pre-lag features to prevent look-ahead.
@@ -32,10 +32,14 @@ What this notebook does:
 - ADV eligibility (liquidity filter),
 - Beta-neutralization overlay,
 - Per-name cap and target gross leverage.
-- Portfolio & costs: long-only or long–short, top-quantile, turnover, transaction costs in bps.
-- Diagnostics: Rank-IC (daily), with sanity probes (XS shuffle, calendar shuffle).
-- Backtest analytics: CAGR, Vol, Sharpe, Max DD, turnover, coverage, equity curves.
-- Model variants (optional): Ridge (prod), ElasticNet, Huber, HistGBR via a toggleable sweep.
+### Portfolio & costs:
+- long-only or long–short, top-quantile, turnover, transaction costs in bps.
+### Diagnostics:
+- Rank-IC (daily), with sanity probes (XS shuffle, calendar shuffle).
+### Backtest analytics:
+- CAGR, Vol, Sharpe, Max DD, turnover, coverage, equity curves.
+### Model variants:
+- Ridge (prod), ElasticNet, Huber, HistGBR via a toggleable sweep.
 
 ---
 
