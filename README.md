@@ -5,7 +5,7 @@ A compact, extensible ML framework for cross-sectional equity forecasting with w
 
 ---
 ## Project Structure
-
+```
 The notebook lives in scripts/.  Market data is under data/tickers
 rp-adaptive-ml-trading/
 ├─ config/                   # (optional) extra config files
@@ -15,7 +15,7 @@ rp-adaptive-ml-trading/
 ├─ data/
 │  └─ tickers_x.zip/               # ← prices + features (tidy, by date,ticker)
 ├─ requirements.txt
-
+```
 ---
 
 ## Pipelines
@@ -72,7 +72,7 @@ conda activate rp-adaptive-ml
 
 # 2. Install dependencies
 pip install -r requirements.txt
-
+```
 ---
 
 ############################################ Previous iteration of the project ############################################
