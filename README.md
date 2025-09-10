@@ -21,32 +21,32 @@ rp-adaptive-ml-trading/
 ## Pipelines
 What this notebook does:
 
-Ingest & QC: prices (close) + engineered features for a stable universe.
-Targets: forward returns at 5D and 21D (trading days).
-As-of alignment: pre-lag features to prevent look-ahead.
-Walk-forward CV: expanding train, monthly steps, embargo = max horizon.
-Lag ensemble: train per as-of lag (e.g., [1,3] or [1,3,5,10]) and weight by train-only IC with shrinkage → equal.
-Per-date neutralization vs prior 1D return: removes market whipsaw exposure and stabilizes ranks.
-(Optional) Horizon ensemble: blend 5D & 21D via train-IC weights with shrinkage.
-Risk overlays (optional):
-ADV eligibility (liquidity filter),
-Beta-neutralization overlay,
-Per-name cap and target gross leverage.
-Portfolio & costs: long-only or long–short, top-quantile, turnover, transaction costs in bps.
-Diagnostics: Rank-IC (daily), with sanity probes (XS shuffle, calendar shuffle).
-Backtest analytics: CAGR, Vol, Sharpe, Max DD, turnover, coverage, equity curves.
-Model variants (optional): Ridge (prod), ElasticNet, Huber, HistGBR via a toggleable sweep.
+- Ingest & QC: prices (close) + engineered features for a stable universe.
+- Targets: forward returns at 5D and 21D (trading days).
+- As-of alignment: pre-lag features to prevent look-ahead.
+- Walk-forward CV: expanding train, monthly steps, embargo = max horizon.
+- Lag ensemble: train per as-of lag (e.g., [1,3] or [1,3,5,10]) and weight by train-only IC with shrinkage → equal.
+- Per-date neutralization vs prior 1D return: removes market whipsaw exposure and stabilizes ranks.
+- Horizon ensemble: blend 5D & 21D via train-IC weights with shrinkage.
+### Risk overlays:
+- ADV eligibility (liquidity filter),
+- Beta-neutralization overlay,
+- Per-name cap and target gross leverage.
+- Portfolio & costs: long-only or long–short, top-quantile, turnover, transaction costs in bps.
+- Diagnostics: Rank-IC (daily), with sanity probes (XS shuffle, calendar shuffle).
+- Backtest analytics: CAGR, Vol, Sharpe, Max DD, turnover, coverage, equity curves.
+- Model variants (optional): Ridge (prod), ElasticNet, Huber, HistGBR via a toggleable sweep.
 
 ---
 
 ## Key toggles & parameters
-USE_VARIANT_SWEEP: False (Ridge-only) or True (multi-model sweep).
-PROD_MODEL_KIND / PROD_MODEL_PARAMS: production model (default Ridge α=1.0).
-LAG_ENS: e.g., [1,3] for low-lag paper profile.
-USE_TRAIN_IC_WEIGHTS + IC_SHRINK_LAMBDA: train-only lag weights w/ shrink.
-USE_HORIZON_ENSEMBLE + HORIZON_LIST + HORIZON_IC_SHRINK_LAMBDA.
-Risk overlays: USE_ADV_ELIGIBILITY, ADV_PCT; USE_BETA_NEUTRAL, BETA_LOOKBACK_DAYS, BETA_NEUTRAL_STRENGTH; USE_PER_NAME_CAP, PER_NAME_CAP; GROSS_LEVERAGE.
-Portfolio knobs: REBALANCE_FREQ, TOP_QUANTILE, HOLDING_PERIOD, TCOST_BPS, LONG_SHORT.
+- USE_VARIANT_SWEEP: False (Ridge-only) or True (multi-model sweep).
+- PROD_MODEL_KIND / PROD_MODEL_PARAMS: production model (default Ridge α=1.0).
+- LAG_ENS: e.g., [1,3] for low-lag paper profile.
+- USE_TRAIN_IC_WEIGHTS + IC_SHRINK_LAMBDA: train-only lag weights w/ shrink.
+- USE_HORIZON_ENSEMBLE + HORIZON_LIST + HORIZON_IC_SHRINK_LAMBDA.
+- Risk overlays: USE_ADV_ELIGIBILITY, ADV_PCT; USE_BETA_NEUTRAL, BETA_LOOKBACK_DAYS, BETA_NEUTRAL_STRENGTH; USE_PER_NAME_CAP, PER_NAME_CAP; GROSS_LEVERAGE.
+- Portfolio knobs: REBALANCE_FREQ, TOP_QUANTILE, HOLDING_PERIOD, TCOST_BPS, LONG_SHORT.
 
 ---
 
