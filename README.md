@@ -5,7 +5,8 @@ A compact, extensible ML framework for cross-sectional equity forecasting with w
 
 ---
 ## Project Structure
-The notebook lives in scripts/.  Market data is under data/tickers
+- The notebook lives in scripts/
+- Market data is under data/tickers
 ```
 rp-adaptive-ml-trading/
 ├─ config/                   # (optional) extra config files
