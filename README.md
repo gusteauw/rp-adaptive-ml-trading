@@ -3,7 +3,7 @@
 
 A compact, extensible ML framework for cross-sectional equity forecasting with walk-forward evaluation, lag & horizon ensembles, and portfolio backtesting. Designed for realistic, paper-ready results (lead–lag, low-lag emphasis).
 
-
+---
 ## Project Structure
 
 The notebook lives in scripts/.  Market data is under data/tickers
@@ -16,6 +16,7 @@ rp-adaptive-ml-trading/
 │  └─ tickers_x.zip/               # ← prices + features (tidy, by date,ticker)
 ├─ requirements.txt
 
+---
 
 ## Pipelines
 What this notebook does:
@@ -36,6 +37,7 @@ Diagnostics: Rank-IC (daily), with sanity probes (XS shuffle, calendar shuffle).
 Backtest analytics: CAGR, Vol, Sharpe, Max DD, turnover, coverage, equity curves.
 Model variants (optional): Ridge (prod), ElasticNet, Huber, HistGBR via a toggleable sweep.
 
+---
 
 ## Key toggles & parameters
 USE_VARIANT_SWEEP: False (Ridge-only) or True (multi-model sweep).
@@ -46,6 +48,7 @@ USE_HORIZON_ENSEMBLE + HORIZON_LIST + HORIZON_IC_SHRINK_LAMBDA.
 Risk overlays: USE_ADV_ELIGIBILITY, ADV_PCT; USE_BETA_NEUTRAL, BETA_LOOKBACK_DAYS, BETA_NEUTRAL_STRENGTH; USE_PER_NAME_CAP, PER_NAME_CAP; GROSS_LEVERAGE.
 Portfolio knobs: REBALANCE_FREQ, TOP_QUANTILE, HOLDING_PERIOD, TCOST_BPS, LONG_SHORT.
 
+---
 
 ## Some tested configs
 
@@ -58,6 +61,8 @@ LAG_ENS=[1,3,5], USE_HORIZON_ENSEMBLE=True with moderate HORIZON_IC_SHRINK_LAMBD
 P3 (robust, lower turnover):
 REBALANCE_FREQ='M', HOLDING_PERIOD=10, TOP_QUANTILE=0.2, ADV filter on, consider beta-neutral overlay to dampen market drift exposure.
 
+---
+
 ## Set-up
 
 ```bash
@@ -68,8 +73,12 @@ conda activate rp-adaptive-ml
 # 2. Install dependencies
 pip install -r requirements.txt
 
+---
 
 ############################################ Previous iteration of the project ############################################
+
+---
+
 
 A modular, extensible machine learning framework for regime-aware modeling, backtesting, and signal generation in financial markets — built using walk-forward cross-validation and feature-script orchestration.
 
