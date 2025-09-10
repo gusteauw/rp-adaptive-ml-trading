@@ -56,14 +56,14 @@ What this notebook does:
 
 ## Some tested configs
 
-P1 (conservative, low-lag, 5D only):
-LAG_ENS=[1,3], USE_HORIZON_ENSEMBLE=False, TCOST_BPS=10–25, TOP_QUANTILE=0.2–0.3, LONG_SHORT=True or long-only; ADV filter on, beta overlay off.
+### P1 (conservative, low-lag, 5D only):
+- LAG_ENS=[1,3], USE_HORIZON_ENSEMBLE=False, TCOST_BPS=10–25, TOP_QUANTILE=0.2–0.3, LONG_SHORT=True or long-only; ADV filter on, beta overlay off.
 
-P2 (balanced 5D+21D):
-LAG_ENS=[1,3,5], USE_HORIZON_ENSEMBLE=True with moderate HORIZON_IC_SHRINK_LAMBDA≈0.4–0.6, ADV filter on, beta overlay optional.
+### P2 (balanced 5D+21D):
+- LAG_ENS=[1,3,5], USE_HORIZON_ENSEMBLE=True with moderate HORIZON_IC_SHRINK_LAMBDA≈0.4–0.6, ADV filter on, beta overlay optional.
 
-P3 (robust, lower turnover):
-REBALANCE_FREQ='M', HOLDING_PERIOD=10, TOP_QUANTILE=0.2, ADV filter on, consider beta-neutral overlay to dampen market drift exposure.
+### P3 (robust, lower turnover):
+- REBALANCE_FREQ='M', HOLDING_PERIOD=10, TOP_QUANTILE=0.2, ADV filter on, consider beta-neutral overlay to dampen market drift exposure.
 
 ---
 
