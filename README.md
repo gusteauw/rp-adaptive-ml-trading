@@ -79,7 +79,7 @@ pip install -r requirements.txt
 ```
 ---
 
-## #### Previous iteration of the project #####
+#  Previous iteration of the project 
 
 ---
 
@@ -89,7 +89,7 @@ A modular, extensible machine learning framework for regime-aware modeling, back
 ---
 
 ## Project Structure
-
+```
 rp-adaptive-ml-trading/
 ├── config/ # Path configurations and environment constants
 ├── scripts/ # Modular ML pipelines (classification, regression, RL, ensemble)
@@ -97,7 +97,7 @@ rp-adaptive-ml-trading/
 ├── data/
 │ └── raw/ # Raw input data (prices, options, macro, valuations)
 ├── requirements.txt # Python dependencies
-
+```
 
 ---
 
