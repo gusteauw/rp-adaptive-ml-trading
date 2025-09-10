@@ -79,7 +79,7 @@ pip install -r requirements.txt
 ```
 ---
 
-# ######################## Previous iteration of the project ########################
+## #### Previous iteration of the project #####
 
 ---
 
