@@ -9,10 +9,10 @@ A compact, extensible ML framework for cross-sectional equity forecasting with w
 - Market data is under data/tickers
 ```
 rp-adaptive-ml-trading/
-├─ config/                   # (optional) extra config files
+├─ config/                   #  extra config files
 ├─ scripts/
-│  └─ leadlag_wf.ipynb       #  main notebook 
-├─ results/                  # (optional) figures / exports
+│  └─ Equity_ML_WF_Notebook.ipynb       #  main notebook 
+├─ results/                  #  figures / exports
 ├─ data/
 │  └─ tickers_x.zip/               #  prices + features (tidy, by date,ticker)
 ├─ requirements.txt
